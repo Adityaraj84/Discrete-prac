@@ -206,3 +206,29 @@ def main():
 if __name__ == "__main__":
     main()
 ## practical 4
+from itertools import product
+
+def find_solutions(n, C):
+    print(f"Solutions to x1 + x2 + ... + x{n} = {C} where xi ≥ 0:")
+
+    count = 0
+    # Generate all combinations of n numbers from 0 to C (brute force)
+    for combo in product(range(C + 1), repeat=n):
+        if sum(combo) == C:
+            print(combo)
+            count += 1
+
+    print(f"\nTotal solutions: {count}")
+
+def main():
+    n = int(input("Enter number of variables (n): "))
+    C = int(input("Enter the constant value (C ≤ 10): "))
+
+    if C > 10 or n <= 0:
+        print("Invalid input! Ensure C ≤ 10 and n > 0.")
+        return
+
+    find_solutions(n, C)
+
+if __name__ == "__main__":
+    main()
