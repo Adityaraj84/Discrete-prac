@@ -93,3 +93,79 @@ def main():
 
 if __name__ == "__main__":
     main()
+## practical 2
+class RELATION:
+    def __init__(self, elements, matrix):
+        self.elements = elements  # List of elements (domain)
+        self.matrix = matrix      # Adjacency matrix representing the relation
+        self.n = len(elements)
+
+    def is_reflexive(self):
+        for i in range(self.n):
+            if self.matrix[i][i] != 1:
+                return False
+        return True
+
+    def is_symmetric(self):
+        for i in range(self.n):
+            for j in range(self.n):
+                if self.matrix[i][j] != self.matrix[j][i]:
+                    return False
+        return True
+
+    def is_anti_symmetric(self):
+        for i in range(self.n):
+            for j in range(self.n):
+                if i != j and self.matrix[i][j] == 1 and self.matrix[j][i] == 1:
+                    return False
+        return True
+
+    def is_transitive(self):
+        for i in range(self.n):
+            for j in range(self.n):
+                if self.matrix[i][j]:
+                    for k in range(self.n):
+                        if self.matrix[j][k] and not self.matrix[i][k]:
+                            return False
+        return True
+
+    def relation_type(self):
+        r = self.is_reflexive()
+        s = self.is_symmetric()
+        a = self.is_anti_symmetric()
+        t = self.is_transitive()
+
+        print(f"Reflexive: {r}")
+        print(f"Symmetric: {s}")
+        print(f"Anti-Symmetric: {a}")
+        print(f"Transitive: {t}")
+
+        if r and s and t:
+            return "Equivalence Relation"
+        elif r and a and t:
+            return "Partial Order Relation"
+        else:
+            return "None"
+
+
+def input_relation():
+    n = int(input("Enter number of elements in the set: "))
+    elements = input("Enter the elements separated by space: ").split()
+
+    print("Enter the adjacency matrix (rows separated by newlines, 0/1 only):")
+    matrix = []
+    for _ in range(n):
+        row = list(map(int, input().split()))
+        matrix.append(row)
+
+    return RELATION(elements, matrix)
+
+
+def main():
+    relation = input_relation()
+    result = relation.relation_type()
+    print("This relation is:", result)
+
+
+if __name__ == "__main__":
+    main()
