@@ -169,3 +169,40 @@ def main():
 
 if __name__ == "__main__":
     main()
+## 3
+from itertools import permutations, product
+
+def get_input_digits():
+    digits = input("Enter digits separated by space: ").split()
+    length = int(input("Enter length of each permutation: "))
+    return digits, length
+
+def generate_without_repetition(digits, length):
+    return list(permutations(digits, length))
+
+def generate_with_repetition(digits, length):
+    return list(product(digits, repeat=length))
+
+def main():
+    digits, length = get_input_digits()
+    
+    print("\nChoose permutation type:")
+    print("1. Without Repetition")
+    print("2. With Repetition")
+    choice = int(input("Enter choice (1 or 2): "))
+
+    if choice == 1:
+        perms = generate_without_repetition(digits, length)
+    elif choice == 2:
+        perms = generate_with_repetition(digits, length)
+    else:
+        print("Invalid choice!")
+        return
+
+    print("\nGenerated Permutations:")
+    for p in perms:
+        print(''.join(p))
+
+if __name__ == "__main__":
+    main()
+## practical 4
