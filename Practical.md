@@ -284,3 +284,41 @@ def main():
 
 if __name__ == "__main__":
     main()
+# Practical 8
+def compute_degrees(adj_list):
+    in_degree = {}
+    out_degree = {}
+
+    # Initialize all degrees to 0
+    for vertex in adj_list:
+        in_degree[vertex] = 0
+        out_degree[vertex] = len(adj_list[vertex])  # out-degree is length of adjacency list
+
+    # Compute in-degree
+    for vertex in adj_list:
+        for neighbor in adj_list[vertex]:
+            if neighbor in in_degree:
+                in_degree[neighbor] += 1
+            else:
+                in_degree[neighbor] = 1
+
+    return in_degree, out_degree
+
+def main():
+    n = int(input("Enter number of vertices: "))
+    adj_list = {}
+
+    print("Enter adjacency list for each vertex (space-separated list of directed neighbors):")
+    for i in range(n):
+        vertex = str(i)
+        neighbors = input(f"Neighbors of vertex {vertex}: ").split()
+        adj_list[vertex] = neighbors
+
+    in_degree, out_degree = compute_degrees(adj_list)
+
+    print("\nVertex\tIn-Degree\tOut-Degree")
+    for vertex in adj_list:
+        print(f"{vertex}\t{in_degree.get(vertex, 0)}\t\t{out_degree.get(vertex, 0)}")
+
+if __name__ == "__main__":
+    main()
