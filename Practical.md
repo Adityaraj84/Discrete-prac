@@ -255,3 +255,32 @@ def main():
 
 if __name__ == "__main__":
     main()
+# Practical 7
+def is_complete_graph(adj_list):
+    n = len(adj_list)
+    for node in adj_list:
+        # A complete graph should connect each node to all other n-1 nodes
+        # Also ensure no self-loops
+        if len(adj_list[node]) != n - 1:
+            return False
+        if node in adj_list[node]:
+            return False
+    return True
+
+def main():
+    n = int(input("Enter number of vertices: "))
+    print("Enter adjacency list for each vertex (space-separated neighbors):")
+
+    adj_list = {}
+    for i in range(n):
+        vertex = str(i)
+        neighbors = input(f"Neighbors of vertex {vertex}: ").split()
+        adj_list[vertex] = neighbors
+
+    if is_complete_graph(adj_list):
+        print("The graph is a Complete Graph.")
+    else:
+        print("The graph is NOT a Complete Graph.")
+
+if __name__ == "__main__":
+    main()
