@@ -146,7 +146,26 @@ class RELATION:
             return "Partial Order Relation"
         else:
             return "None"
+## Practical 5
+def evaluate_polynomial(coeffs, n):
+    result = 0
+    degree = len(coeffs) - 1
+    for i in range(len(coeffs)):
+        result += coeffs[i] * (n ** (degree - i))
+    return result
 
+def main():
+    # Example: f(n) = 4n^2 + 2n + 9
+    # Coefficients: [4, 2, 9]  => 4n^2 + 2n + 9
+    coeffs = list(map(int, input("Enter coefficients of the polynomial (highest degree first): ").split()))
+    n = int(input("Enter the value of n: "))
+    
+    value = evaluate_polynomial(coeffs, n)
+    print(f"Value of the polynomial at n = {n} is: {value}")
+
+if __name__ == "__main__":
+    main()
+# practical 6
 
 def input_relation():
     n = int(input("Enter number of elements in the set: "))
