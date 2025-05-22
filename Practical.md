@@ -166,25 +166,34 @@ def main():
 if __name__ == "__main__":
     main()
 # practical 6
-
-def input_relation():
-    n = int(input("Enter number of elements in the set: "))
-    elements = input("Enter the elements separated by space: ").split()
-
-    print("Enter the adjacency matrix (rows separated by newlines, 0/1 only):")
-    matrix = []
-    for _ in range(n):
-        row = list(map(int, input().split()))
-        matrix.append(row)
-
-    return RELATION(elements, matrix)
-
+def is_complete_graph(adj_matrix):
+    n = len(adj_matrix)
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                if adj_matrix[i][j] != 0:
+                    return False
+            else:
+                if adj_matrix[i][j] != 1:
+                    return False
+    return True
 
 def main():
-    relation = input_relation()
-    result = relation.relation_type()
-    print("This relation is:", result)
+    n = int(input("Enter number of vertices in the graph: "))
+    print("Enter the adjacency matrix row by row (space separated 0s and 1s):")
 
+    adj_matrix = []
+    for i in range(n):
+        row = list(map(int, input(f"Row {i+1}: ").split()))
+        if len(row) != n:
+            print("Invalid row length! Must be equal to number of vertices.")
+            return
+        adj_matrix.append(row)
+
+    if is_complete_graph(adj_matrix):
+        print("The graph is a Complete Graph.")
+    else:
+        print("The graph is NOT a Complete Graph.")
 
 if __name__ == "__main__":
     main()
@@ -203,12 +212,7 @@ def generate_with_repetition(digits, length):
     return list(product(digits, repeat=length))
 
 def main():
-    digits, length = get_input_digits()
-    
-    print("\nChoose permutation type:")
-    print("1. Without Repetition")
-    print("2. With Repetition")
-    choice = int(input("Enter choice (1 or 2): "))
+    digits, ut("Enter choice (1 or 2): "))
 
     if choice == 1:
         perms = generate_without_repetition(digits, length)
